@@ -1,13 +1,13 @@
 {
   "id": "./",
-  "name": "PWA Template Responsif",
-  "short_name": "PWA Demo",
-  "description": "Aplikasi PWA responsif untuk demonstrasi template dasar Progressive Web App dengan dukungan offline dan installable.",
+  "name": "Game Tandur",
+  "short_name": "Tandur",
+  "description": "Sebuah Game virtual pet bertema tanaman, terinspirasi dari mekanik game Pou. Rawat tanaman virtualmu dari bibit hingga besar. Siram, beri pupuk, bersihkan, dan mainkan mini game untuk membuatnya tumbuh bahagia",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#4F46E5",
-  "theme_color": "#4F46E5",
+  "background_color": "#328260",
+  "theme_color": "#328260",
   "orientation": "portrait",
   "lang": "id",
   "icons": [
