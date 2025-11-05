@@ -7,8 +7,8 @@ const urlsToCache = [
   `${BASE_URL}offline.html`,
   `${BASE_URL}assets/style.css`,
   `${BASE_URL}manifest.json`,
-  `${BASE_URL}icons/LOGO TANDUR 192.png`,
-  `${BASE_URL}icons/LOGO TANDUR 512.png`,
+  `${BASE_URL}icons/LOGO-TANDUR-192.png`,
+  `${BASE_URL}icons/LOGO-TANDUR-512.png`,
 ];
 
 // Install Service Worker & simpan file ke cache
