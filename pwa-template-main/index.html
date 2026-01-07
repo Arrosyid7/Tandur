@@ -1,48 +1,176 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#4F46E5" />
-  <link rel="manifest" href="manifest.json" />
-  <link rel="icon" href="icons/icon-192x192-A.png" type="image/png" />
-  <title>PWA Template Responsif</title>
-  <link rel="stylesheet" href="assets/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Tandur - Terrarium Tiny</title>
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#e0f2f1">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
+<body class="bg-light">
 
-<body>
-  <header class="header">
-    <h1>PWA Template</h1>
-    <p>Contoh aplikasi web progresif yang responsif</p>
-  </header>
+    <audio id="bgm" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mp3">
+    </audio>
+    <audio id="sfx-water">
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_c8c8a73467.mp3" type="audio/mp3">
+    </audio>
 
-  <main class="main">
-    <section class="card">
-      <h2>Selamat Datang!</h2>
-      <p>
-        Ini adalah template PWA responsif. Kamu bisa ubah teks, warna, dan layout-nya sesuai kebutuhan.
-      </p>
-      <button onclick="alert('PWA aktif!')">Tes Tombol</button>
-    </section>
-  </main>
-  <button onclick="alert('tombol testing hidup')">Ini tombol 1</button>
+    <div id="auth-section" class="container d-flex flex-column justify-content-center min-vh-100">
+        <div class="card shadow-lg border-0 rounded-4 glass-panel p-4 mx-auto" style="max-width: 400px; width: 100%;">
+            <div class="text-center mb-4">
+                <h1 class="text-success fw-bold">Tandur 🌱</h1>
+                <p class="text-muted">Relaksasi di saku Anda</p>
+            </div>
 
-  <footer class="footer">
-    <p>© 2025 Tandur App</p>
-  </footer>
+            <form id="login-form">
+                <div class="mb-3">
+                    <input type="email" id="login-email" class="form-control rounded-pill" placeholder="Email" required>
+                </div>
+                <div class="mb-3">
+                    <input type="password" id="login-password" class="form-control rounded-pill" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn btn-success w-100 rounded-pill mb-2">Masuk</button>
+                <p class="text-center small">Belum punya akun? <a href="#" id="show-register">Daftar</a></p>
+            </form>
 
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./service-worker.js')
-        .then(() => console.log('SW registered!'))
-        .catch(err => console.error('SW gagal:', err));
-    }
-  </script>
+            <form id="register-form" class="d-none">
+                <div class="mb-3">
+                    <input type="text" id="reg-name" class="form-control rounded-pill" placeholder="Nama Panggilan" required>
+                </div>
+                <div class="mb-3">
+                    <input type="email" id="reg-email" class="form-control rounded-pill" placeholder="Email" required>
+                </div>
+                <div class="mb-3">
+                    <input type="password" id="reg-password" class="form-control rounded-pill" placeholder="Password (Min. 6 Karakter)" minlength="6" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 rounded-pill mb-2">Daftar</button>
+                <p class="text-center small">Sudah punya akun? <a href="#" id="show-login">Masuk</a></p>
+            </form>
+        </div>
+    </div>
 
+    <div id="game-section" class="d-none vh-100 position-relative overflow-hidden">
+        
+        <div class="sky-background"></div>
+
+        <div class="game-ui position-absolute top-0 start-0 w-100 p-3 d-flex justify-content-between align-items-center">
+            <div class="glass-badge p-2 px-3 rounded-pill text-dark">
+                <span id="user-level" class="fw-bold">Lvl 1</span>
+                <div class="progress mt-1" style="height: 5px; width: 60px;">
+                    <div id="xp-bar" class="progress-bar bg-success" role="progressbar" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="glass-badge p-2 px-3 rounded-pill text-primary">
+                <i class="fas fa-tint"></i> <span id="currency-display">0</span>
+            </div>
+            <div>
+                <button id="zen-mode-btn" class="btn btn-sm btn-light rounded-circle shadow-sm me-1"><i class="fas fa-eye-slash"></i></button>
+                <button id="profile-btn" class="btn btn-sm btn-light rounded-circle shadow-sm" data-bs-toggle="modal" data-bs-target="#profileModal"><i class="fas fa-user"></i></button>
+            </div>
+        </div>
+
+        <div class="terrarium-container d-flex justify-content-center align-items-center h-100">
+            <div class="terrarium-jar position-relative">
+                <div id="insect-layer"></div>
+                
+                <div class="plant-container text-center">
+                    <div id="plant-visual" class="display-1 drop-shadow">🌱</div>
+                    <div id="soil-visual" class="soil mt-2"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-ui position-absolute bottom-0 start-0 w-100 p-3 pb-4">
+            <div class="row g-2 mb-3 justify-content-center text-center">
+                <div class="col-3">
+                    <small class="text-white shadow-text">Air</small>
+                    <div class="progress rounded-pill shadow-sm" style="height: 8px;">
+                        <div id="water-bar" class="progress-bar bg-info" style="width: 50%"></div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <small class="text-white shadow-text">Cahaya</small>
+                    <div class="progress rounded-pill shadow-sm" style="height: 8px;">
+                        <div id="sun-bar" class="progress-bar bg-warning" style="width: 50%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-around glass-panel p-3 rounded-4 mx-auto" style="max-width: 500px;">
+                <button class="btn btn-action rounded-circle bg-info text-white" onclick="game.waterPlant()">
+                    <i class="fas fa-watering-can"></i>
+                </button>
+                <button class="btn btn-action rounded-circle bg-warning text-white" onclick="game.prunePlant()">
+                    <i class="fas fa-leaf"></i>
+                </button>
+                <button class="btn btn-action rounded-circle bg-success text-white" data-bs-toggle="modal" data-bs-target="#shopModal">
+                    <i class="fas fa-store"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="profileModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title">Profil Penanam</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="avatar bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px; font-size: 2rem;">
+                        <i class="fas fa-user-astronaut"></i>
+                    </div>
+                    <h4 id="profile-name">User</h4>
+                    <p id="profile-email" class="text-muted">user@example.com</p>
+                    <hr>
+                    <button class="btn btn-danger w-100 rounded-pill" onclick="auth.logout()">Log Out</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="shopModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content rounded-4 border-0">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title">Toko Kebun</h5>
+                    <span class="badge bg-primary rounded-pill ms-2"><i class="fas fa-tint"></i> <span id="shop-currency">0</span></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info small">Kumpulkan "Embun Cahaya" dari serangga untuk belanja!</div>
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>🌿 Pupuk Ajaib (+50 XP)</span>
+                            <button class="btn btn-sm btn-outline-success rounded-pill" onclick="game.buyItem('fertilizer', 100)">100 <i class="fas fa-tint"></i></button>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>🏺 Botol Kaca Antik</span>
+                            <button class="btn btn-sm btn-outline-success rounded-pill" onclick="game.buyItem('jar', 500)">500 <i class="fas fa-tint"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(() => console.log('Service Worker Registered'))
+                .catch(err => console.log('SW Error:', err));
+        }
+    </script>
 </body>
-
 </html>
