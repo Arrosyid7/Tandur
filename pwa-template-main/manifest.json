@@ -1,54 +1,21 @@
 {
-  "id": "./",
-  "name": "Game Tandur",
+  "name": "Tandur - Relaxing Terrarium",
   "short_name": "Tandur",
-  "description": "Sebuah Game virtual pet bertema tanaman, terinspirasi dari mekanik game Pou. Rawat tanaman virtualmu dari bibit hingga besar. Siram, beri pupuk, bersihkan, dan mainkan mini game untuk membuatnya tumbuh bahagia",
   "start_url": "./index.html",
-  "scope": "./",
   "display": "standalone",
-  "background_color": "#328260",
-  "theme_color": "#328260",
-  "orientation": "portrait",
-  "lang": "id",
+  "background_color": "#e0f2f1",
+  "theme_color": "#e0f2f1",
+  "description": "Game terarium virtual untuk relaksasi dan fokus.",
   "icons": [
     {
-      "src": "icons/icon-192x192-A.png",
+      "src": "https://cdn-icons-png.flaticon.com/512/628/628283.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "icons/icon-512x512-B.png",
+      "src": "https://cdn-icons-png.flaticon.com/512/628/628283.png",
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "screenshots": [
-    {
-      "src": "icons/screenshot1.png",
-      "sizes": "1080x1920",
-      "type": "image/png"
-    },
-    {
-      "src": "icons/screenshot2.png",
-      "sizes": "1080x1920",
-      "type": "image/png"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "Buka Beranda",
-      "short_name": "Home",
-      "url": "./index.html",
-      "icons": [
-        {
-          "src": "icons/icon-192x192-A.png",
-          "sizes": "192x192"
-        }
-      ]
-    }
-  ],
-  "categories": [
-    "productivity",
-    "utilities"
   ]
 }
