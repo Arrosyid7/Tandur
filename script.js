@@ -1,4 +1,3 @@
-
 /* ================= SYSTEM AUTHENTICATION ================= */
 const auth = {
     users: JSON.parse(localStorage.getItem('tandur_users')) || [],
@@ -18,7 +17,9 @@ const auth = {
                 level: 1, xp: 0, dew: 0,
                 water: 80, sun: 80,
                 plantStage: 0, // 0: Seed, 1: Sprout, etc.
-                lastLogin: Date.now()
+                lastLogin: Date.now(),
+                currentBackground: 'default', // Background default
+                ownedBackgrounds: ['default'] // Background yang dimiliki
             }
         };
         auth.users.push(newUser);
@@ -32,6 +33,11 @@ const auth = {
         const user = auth.users.find(u => u.email === email && u.password === hashedPassword);
         if (user) {
             auth.currentUser = user;
+            // Pastikan user lama punya field background
+            if (!user.gameData.currentBackground) {
+                user.gameData.currentBackground = 'default';
+                user.gameData.ownedBackgrounds = ['default'];
+            }
             localStorage.setItem('tandur_session', JSON.stringify(user));
             app.init();
             return true;
@@ -65,10 +71,46 @@ const auth = {
 const game = {
     plants: ['🌱', '🌿', '🌷', '🌻', '🌳', '🌲', '🌸', '🎋', '🌴', '🧛‍♀️'], // Level 10 is Venus Flytrap
     
+    // Background Definitions
+    backgrounds: {
+        default: {
+            name: 'Default',
+            image: null, // Tidak pakai gambar, pakai gradient
+            gradient: 'linear-gradient(180deg, #87CEEB 0%, #E0F6FF 100%)',
+            cost: 0
+        },
+        winter: {
+            name: 'Musim Salju',
+            image: 'salju.jpg',
+            cost: 300
+        },
+        spring: {
+            name: 'Musim Semi',
+            image: 'semi.jpg',
+            cost: 300
+        },
+        night: {
+            name: 'Malam',
+            image: 'malam.jpg',
+            cost: 250
+        },
+        autumn: {
+            name: 'Musim Gugur',
+            image: 'gugur.jpg',
+            cost: 300
+        },
+        sunset: {
+            name: 'Senja',
+            image: 'senja.jpg',
+            cost: 200
+        }
+    },
+    
     init: () => {
         game.renderUI();
         game.startLoop();
         game.calculateOfflineProgress();
+        game.applyBackground(auth.currentUser.gameData.currentBackground); // Load saved background
         
         // Background Music (Auto play policy requires interaction usually)
         document.body.addEventListener('click', () => {
@@ -195,6 +237,47 @@ const game = {
             auth.updateUserData();
         } else {
             alert("Embun Cahaya tidak cukup!");
+        }
+    },
+
+    // ================= BACKGROUND SYSTEM =================
+    buyBackground: (backgroundType, cost) => {
+        const data = auth.currentUser.gameData;
+        
+        // Cek apakah sudah memiliki background ini
+        if (data.ownedBackgrounds.includes(backgroundType)) {
+            alert("Kamu sudah memiliki background ini! Langsung dipakai ya.");
+            game.applyBackground(backgroundType);
+            return;
+        }
+        
+        // Cek apakah embun cukup
+        if (data.dew >= cost) {
+            data.dew -= cost;
+            data.ownedBackgrounds.push(backgroundType);
+            game.applyBackground(backgroundType);
+            alert(`Background "${game.backgrounds[backgroundType].name}" berhasil dibeli & dipasang!`);
+            game.renderUI();
+            auth.updateUserData();
+        } else {
+            alert(`Embun Cahaya tidak cukup! Kamu butuh ${cost} embun.`);
+        }
+    },
+
+    applyBackground: (backgroundType) => {
+        const skyBg = document.querySelector('.sky-background');
+        if (skyBg && game.backgrounds[backgroundType]) {
+            const bg = game.backgrounds[backgroundType];
+            
+            // Jika ada gambar, pakai gambar. Jika tidak, pakai gradient
+            if (bg.image) {
+                skyBg.style.background = `url('${bg.image}') center/cover no-repeat`;
+            } else if (bg.gradient) {
+                skyBg.style.background = bg.gradient;
+            }
+            
+            auth.currentUser.gameData.currentBackground = backgroundType;
+            auth.updateUserData();
         }
     },
 
