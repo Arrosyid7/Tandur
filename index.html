@@ -147,7 +147,10 @@
                 </div>
                 <div class="modal-body">
                     <div class="alert alert-info small">Kumpulkan "Embun Cahaya" dari serangga untuk belanja!</div>
-                    <div class="list-group list-group-flush">
+                    
+                    <!-- Items Section -->
+                    <h6 class="fw-bold text-success mb-3"><i class="fas fa-box"></i> Item</h6>
+                    <div class="list-group list-group-flush mb-4">
                         <div class="list-group-item d-flex justify-content-between align-items-center">
                             <span>🌿 Pupuk Ajaib (+50 XP)</span>
                             <button class="btn btn-sm btn-outline-success rounded-pill" onclick="game.buyItem('fertilizer', 100)">100 <i class="fas fa-tint"></i></button>
@@ -155,6 +158,56 @@
                         <div class="list-group-item d-flex justify-content-between align-items-center">
                             <span>🏺 Botol Kaca Antik</span>
                             <button class="btn btn-sm btn-outline-success rounded-pill" onclick="game.buyItem('jar', 500)">500 <i class="fas fa-tint"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Background Section -->
+                    <h6 class="fw-bold text-primary mb-3"><i class="fas fa-image"></i> Latar Belakang</h6>
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <span>❄️ Latar Musim Salju</span>
+                                <small class="d-block text-muted">Suasana dingin & bersalju</small>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary rounded-pill" onclick="game.buyBackground('winter', 300)">
+                                300 <i class="fas fa-tint"></i>
+                            </button>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <span>🌸 Latar Musim Semi</span>
+                                <small class="d-block text-muted">Cerah dengan bunga sakura</small>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary rounded-pill" onclick="game.buyBackground('spring', 300)">
+                                300 <i class="fas fa-tint"></i>
+                            </button>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <span>🌙 Latar Malam</span>
+                                <small class="d-block text-muted">Langit malam berbintang</small>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary rounded-pill" onclick="game.buyBackground('night', 250)">
+                                250 <i class="fas fa-tint"></i>
+                            </button>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <span>🍂 Latar Musim Gugur</span>
+                                <small class="d-block text-muted">Hangat dengan dedaunan</small>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary rounded-pill" onclick="game.buyBackground('autumn', 300)">
+                                300 <i class="fas fa-tint"></i>
+                            </button>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <span>🌅 Latar Senja</span>
+                                <small class="d-block text-muted">Gradasi oranye & ungu</small>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary rounded-pill" onclick="game.buyBackground('sunset', 200)">
+                                200 <i class="fas fa-tint"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
