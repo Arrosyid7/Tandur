@@ -132,6 +132,34 @@ body.zen-active .game-ui {
     transition: opacity 1s ease;
 }
 
+/* Water Animation */
+.water-drop {
+    position: absolute;
+    top: -10px;
+    width: 4px;
+    height: 10px;
+    background: linear-gradient(to bottom, #87CEEB, #4682B4);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: waterFall 1s ease-in forwards;
+    z-index: 5;
+}
+
+@keyframes waterFall {
+    0% { transform: translateY(-10px) scale(1); opacity: 1; }
+    50% { transform: translateY(50px) scale(1.2); opacity: 0.8; }
+    100% { transform: translateY(100px) scale(0.8); opacity: 0; }
+}
+
+/* Sun Ray Animation */
+.sun-ray-animation {
+    animation: sunRays 2s ease-in-out;
+}
+
+@keyframes sunRays {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.3) saturate(1.2); }
+}
+
 /* Responsive adjustments */
 @media (max-width: 576px) {
     .terrarium-jar {

@@ -155,25 +155,31 @@ const game = {
 
     waterPlant: () => {
         if(auth.currentUser.gameData.water >= 100) return;
-        
+
         // Haptic
         if(navigator.vibrate) navigator.vibrate(50);
-        
+
         // Sound
         const sfx = document.getElementById('sfx-water');
-        sfx.currentTime = 0; 
+        sfx.currentTime = 0;
         sfx.play();
 
         auth.currentUser.gameData.water = Math.min(100, auth.currentUser.gameData.water + 20);
         game.addXP(10);
         game.renderUI();
+        game.triggerWaterAnimation();
     },
 
-    prunePlant: () => {
-        // Animation only for demo, adds XP
-        if(navigator.vibrate) navigator.vibrate(30);
-        game.addXP(5);
-        alert("Kamu membersihkan daun kering. Tanamanmu senang!");
+    sunPlant: () => {
+        if(auth.currentUser.gameData.sun >= 100) return;
+
+        // Haptic
+        if(navigator.vibrate) navigator.vibrate(50);
+
+        auth.currentUser.gameData.sun = Math.min(100, auth.currentUser.gameData.sun + 20);
+        game.addXP(10);
+        game.renderUI();
+        game.triggerSunAnimation();
     },
 
     spawnInsect: () => {
