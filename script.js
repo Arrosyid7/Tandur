@@ -198,8 +198,8 @@ const game = {
 
         document.getElementById('insect-layer').appendChild(el);
 
-        // Auto remove after 5 seconds
-        setTimeout(() => el.remove(), 5000);
+        // Auto remove after 3 seconds
+        setTimeout(() => el.remove(), 3000);
     },  
 
     addXP: (amount) => {
