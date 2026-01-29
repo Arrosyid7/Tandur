@@ -82,27 +82,27 @@ const game = {
         winter: {
             name: 'Musim Salju',
             image: 'salju.jpg',
-            cost: 300
+            cost: 30
         },
         spring: {
             name: 'Musim Semi',
             image: 'semi.jpg',
-            cost: 300
+            cost: 30
         },
         night: {
             name: 'Malam',
             image: 'malam.jpg',
-            cost: 250
+            cost: 25
         },
         autumn: {
             name: 'Musim Gugur',
             image: 'gugur.jpg',
-            cost: 300
+            cost: 30
         },
         sunset: {
             name: 'Senja',
             image: 'senja.jpg',
-            cost: 200
+            cost: 20
         }
     },
     
@@ -198,9 +198,9 @@ const game = {
 
         document.getElementById('insect-layer').appendChild(el);
 
-        // Auto remove after 10 seconds
-        setTimeout(() => el.remove(), 10000);
-    },
+        // Auto remove after 5 seconds
+        setTimeout(() => el.remove(), 50000);
+    },  
 
     addXP: (amount) => {
         let data = auth.currentUser.gameData;
