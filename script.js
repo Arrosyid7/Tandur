@@ -15,7 +15,7 @@ const auth = {
             // Game Data Initial State
             gameData: {
                 level: 1, xp: 0, dew: 0,
-                water: 50, sun: 50,
+                water: 20, sun: 20,
                 plantStage: 0, // 0: Seed, 1: Sprout, etc.
                 lastLogin: Date.now(),
                 currentBackground: 'default', // Background default
@@ -121,7 +121,7 @@ const game = {
 
     calculateOfflineProgress: () => {
         const now = Date.now();
-        const diffHours = (now - auth.currentUser.gameData.lastLogin) / (50 * 10 * 10);
+        const diffHours = (now - auth.currentUser.gameData.lastLogin) / (10 * 10 * 10);
         
         // Kurangi air dan cahaya berdasarkan waktu offline
         if(diffHours > 1) {
@@ -150,7 +150,7 @@ const game = {
 
             game.renderUI();
             auth.updateUserData();
-        }, 3000); // Update every 3 seconds
+        }, 1000); // Update every 1 seconds
     },
 
     waterPlant: () => {
