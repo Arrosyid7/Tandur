@@ -15,7 +15,7 @@ const auth = {
             // Game Data Initial State
             gameData: {
                 level: 1, xp: 0, dew: 0,
-                water: 80, sun: 80,
+                water: 50, sun: 50,
                 plantStage: 0, // 0: Seed, 1: Sprout, etc.
                 lastLogin: Date.now(),
                 currentBackground: 'default', // Background default
@@ -137,8 +137,8 @@ const game = {
     startLoop: () => {
         setInterval(() => {
             // Natural depletion
-            if(auth.currentUser.gameData.water > 0) auth.currentUser.gameData.water -= 0.5;
-            if(auth.currentUser.gameData.sun > 0) auth.currentUser.gameData.sun -= 0.3; // Slower drain
+            if(auth.currentUser.gameData.water > 0) auth.currentUser.gameData.water -= 0.9;
+            if(auth.currentUser.gameData.sun > 0) auth.currentUser.gameData.sun -= 0.9; // Slower drain
             
             // Random Insect Spawn (10% chance every 3 sec)
             if(Math.random() < 0.1) game.spawnInsect();
@@ -204,8 +204,8 @@ const game = {
 
         document.getElementById('insect-layer').appendChild(el);
 
-        // Auto remove after 3 seconds
-        setTimeout(() => el.remove(), 3000);
+        // Auto remove after 2 seconds
+        setTimeout(() => el.remove(), 2000);
     },  
 
     addXP: (amount) => {
