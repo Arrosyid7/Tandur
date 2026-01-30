@@ -121,7 +121,7 @@ const game = {
 
     calculateOfflineProgress: () => {
         const now = Date.now();
-        const diffHours = (now - auth.currentUser.gameData.lastLogin) / (1000 * 60 * 60);
+        const diffHours = (now - auth.currentUser.gameData.lastLogin) / (50 * 10 * 10);
         
         // Kurangi air dan cahaya berdasarkan waktu offline
         if(diffHours > 1) {
@@ -137,8 +137,8 @@ const game = {
     startLoop: () => {
         setInterval(() => {
             // Natural depletion
-            if(auth.currentUser.gameData.water > 0) auth.currentUser.gameData.water -= 0.9;
-            if(auth.currentUser.gameData.sun > 0) auth.currentUser.gameData.sun -= 0.9; // Slower drain
+            if(auth.currentUser.gameData.water > 0) auth.currentUser.gameData.water -= 0.1;
+            if(auth.currentUser.gameData.sun > 0) auth.currentUser.gameData.sun -= 0.1; // Slower drain
             
             // Random Insect Spawn (10% chance every 3 sec)
             if(Math.random() < 0.1) game.spawnInsect();
