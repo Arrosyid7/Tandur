@@ -2,7 +2,7 @@
   "name": "Tandur - Relaxing Terrarium",
   "short_name": "Tandur",
   "start_url": "./index.html",
-  "display": "minimal-ui",
+  "display": "fullscreen",
   "background_color": "#e0f2f1",
   "theme_color": "#e0f2f1",
   "description": "Game terarium virtual untuk relaksasi dan fokus.",
