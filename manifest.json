@@ -1,7 +1,7 @@
 {
   "name": "Tandur - Relaxing Terrarium",
   "short_name": "Tandur",
-  "start_url": "./index.html",
+  "start_url": "/",
   "display": "fullscreen",
   "background_color": "#e0f2f1",
   "theme_color": "#e0f2f1",
